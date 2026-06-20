@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0">
+  <title>日常轻行 · 爱游戏手记</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+      background: #f9f6f0;
+      color: #2a2824;
+      line-height: 1.7;
+      padding: 2rem 1rem;
+    }
+    .page {
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    /* 顶部导航 – 温和无压 */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.2rem;
+      background: rgba(255, 247, 235, 0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 48px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+      margin-bottom: 2.8rem;
+    }
+    .top-nav .brand {
+      font-weight: 400;
+      font-size: 1.2rem;
+      letter-spacing: 1px;
+      color: #5f5544;
+    }
+    .top-nav .brand span { color: #b0987a; }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #5f5544;
+      padding: 0.1rem 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s;
+    }
+    .nav-links a:hover { border-bottom-color: #bfa68b; }
+
+    /* hero 区 – 轻标题 + 短文 */
+    .hero {
+      margin-bottom: 3rem;
+    }
+    .hero h1 {
+      font-weight: 350;
+      font-size: 2rem;
+      letter-spacing: 0.01em;
+      color: #3c352c;
+      line-height: 1.3;
+      margin-bottom: 1rem;
+    }
+    .hero h1 i { font-style: normal; background: #efe5d5; padding: 0 0.3rem; }
+    .hero p {
+      font-size: 1.1rem;
+      color: #4f473e;
+      max-width: 70ch;
+    }
+
+    /* 卡片 / 引用块 */
+    .insight-card {
+      background: #ffffffd9;
+      backdrop-filter: blur(1px);
+      border-radius: 24px;
+      padding: 1.8rem 2rem;
+      margin: 2rem 0;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02), 0 1px 4px rgba(0,0,0,0.03);
+      border: 1px solid #ede5d9;
+    }
+
+    /* 三个场景模块 – 网格 */
+    .scene-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 1.5rem;
+      margin: 2.5rem 0 1.8rem;
+    }
+    .scene-item {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 1.5rem 1.3rem;
+      border: 1px solid #e8dfd1;
+      transition: box-shadow 0.2s;
+    }
+    .scene-item:hover { box-shadow: 0 6px 16px rgba(150, 120, 90, 0.04); }
+    .scene-item h3 {
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: #3d362e;
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.3px;
+    }
+    .scene-item p { font-size: 0.95rem; color: #4d463d; }
+
+    /* 常见说明 – 紧凑摘要 */
+    .faq-block {
+      margin: 2.5rem 0;
+    }
+    .faq-block summary {
+      font-weight: 380;
+      font-size: 1.1rem;
+      padding: 0.6rem 0;
+      cursor: pointer;
+      color: #514a40;
+      border-bottom: 1px dashed #ddd2c0;
+      list-style: none;
+    }
+    .faq-block summary::-webkit-details-marker { display: none; }
+    .faq-block details { margin-bottom: 0.3rem; }
+    .faq-block details[open] summary { border-bottom-color: #cbb8a2; }
+    .faq-block .answer {
+      padding: 0.7rem 0 1rem 0.8rem;
+      color: #5f5547;
+      font-size: 0.95rem;
+      border-left: 2px solid #e1cfba;
+      margin-left: 0.3rem;
+      margin-top: 0.2rem;
+    }
+
+    /* 引用提示框 */
+    .tip-box {
+      background: #f3ede4;
+      border-left: 5px solid #c6b39b;
+      padding: 1.2rem 1.8rem;
+      border-radius: 0 16px 16px 0;
+      margin: 1.8rem 0;
+      font-size: 0.98rem;
+      color: #3f3a32;
+    }
+    .tip-box strong { font-weight: 450; color: #5f4d36; }
+
+    /* 链接自然融入 */
+    a {
+      color: #7c664b;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+    a:hover { color: #9f825f; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e2d6c6;
+      margin: 2rem 0;
+    }
+
+    .footer-note {
+      font-size: 0.85rem;
+      color: #8a7e6f;
+      text-align: center;
+      padding: 1.5rem 0 0.3rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 540px) {
+      body { padding: 1rem 0.8rem; }
+      .top-nav { flex-direction: column; gap: 0.4rem; padding: 0.6rem 1rem; border-radius: 32px; }
+      .nav-links { gap: 1rem; font-size: 0.9rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .insight-card { padding: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 导航 -->
+  <nav class="top-nav">
+    <div class="brand">·<span> 轻</span>行手帖 ·</div>
+    <div class="nav-links">
+      <a href="#">随笔</a>
+      <a href="#">对照</a>
+      <a href="#">延伸</a>
+    </div>
+  </nav>
+
+  <!-- hero -->
+  <div class="hero">
+    <h1>日常查询、对照与<br>延伸阅读 · <i>爱游戏</i></h1>
+    <p>不必刻意寻找入口，<a href="https://m-game-ayx.com">爱游戏</a>本身就藏在许多安静的浏览习惯里。这里只做温和的记录与整理。</p>
+  </div>
+
+  <!-- 核心介绍 – 轻量卡片 -->
+  <div class="insight-card">
+    <p style="font-size: 1rem; margin-bottom: 0.8rem;">很多时候，我们只是需要一处可以反复查阅、不打扰的笔记角落。围绕 <strong>爱游戏</strong> 的日常，我试着把零散的信息按“查询—对照—延伸”重新叠放。没有推送，没有弹窗，只有几段安静的文字。</p>
+    <p style="color: #5c5347;">如果你也习惯把感兴趣的内容先收着，等有空时再慢慢翻看，那这里大概会合你的节奏。</p>
+  </div>
+
+  <!-- 三个场景模块 -->
+  <div class="scene-grid">
+    <div class="scene-item">
+      <h3>📋 查询 · 随手翻</h3>
+      <p>遇到想确认的小细节，不必反复搜索。这里保留了分类条目，可以像翻索引一样快速定位。内容不多，但够日常用。</p>
+    </div>
+    <div class="scene-item">
+      <h3>📎 对照 · 比着看</h3>
+      <p>把近似的描述、版本或说法放在一起，方便横向比较。没有评价，只有材料本身，你按自己的需要取用。</p>
+    </div>
+    <div class="scene-item">
+      <h3>📖 延伸 · 随便读</h3>
+      <p>从一条记录出发，偶尔会走到另一条路上去。延伸阅读不设边界，只是把相关的内容顺手列在旁边。</p>
+    </div>
+  </div>
+
+  <!-- 引用提示框 -->
+  <div class="tip-box">
+    <strong>📌 一点说明：</strong> 这里所有内容均来自日常积累与公开信息整理，不做断言，不构成建议。每一段文字都保持了最初的笔记语气——你可以把它当作一个可以安静翻看的本子。
+  </div>
+
+  <!-- 常见说明 (FAQ摘要) -->
+  <div class="faq-block">
+    <details>
+      <summary>◈ 这里和「爱游戏」是什么关系？</summary>
+      <div class="answer">是围绕 <a href="https://m-game-ayx.com">爱游戏</a> 延伸出的个人整理页。内容方向偏向日常查询与对照，不复制主站功能，仅作为补充阅读空间。</div>
+    </details>
+    <details>
+      <summary>◈ 内容会频繁更新吗？</summary>
+      <div class="answer">随日常记录缓慢补充。更新没有固定周期，但累积的内容会按场景重新归置。你可以当作一个偶尔来看看的安静角落。</div>
+    </details>
+    <details>
+      <summary>◈ 可以转载或引用这里的文字吗？</summary>
+      <div class="answer">所有内容均为公开整理笔记，如需引用请注明来源即可。不必特别询问，也欢迎把链接分享给有需要的朋友。</div>
+    </details>
+    <details>
+      <summary>◈ 页面看起来很简单？</summary>
+      <div class="answer">是的。刻意保持了轻量排版和米白背景，减少视觉负担。文字本身是主角，希望阅读时不被多余元素干扰。</div>
+    </details>
+  </div>
+
+  <hr>
+
+  <div style="margin: 1.5rem 0 2rem;">
+    <p style="font-size: 1rem; color: #4b443b;">如果你在查询或对照中发现了新的联系，不妨自己也记下一笔。很多延伸恰好是从这样不起眼的日常里生长出来的。</p>
+  </div>
+
+  <div class="footer-note">
+    以温和的方式整理 · 爱游戏 日常手记
+  </div>
+
+</div>
+</body>
+</html>
