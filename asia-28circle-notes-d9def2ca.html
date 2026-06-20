@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>28圈 · 收藏每一次回访</title>
+    <style>
+        /* reset & base */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Roboto, 'Noto Sans SC', system-ui, -apple-system, sans-serif;
+            background: #faf7f2;
+            color: #2e2b26;
+            line-height: 1.7;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .page {
+            max-width: 840px;
+            width: 100%;
+            background: #fffcf8;
+            border-radius: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.04), 0 2px 8px rgba(0,0,0,0.02);
+            padding: 2.5rem 2rem;
+        }
+        @media (max-width: 600px) {
+            body { padding: 1rem 0.5rem; }
+            .page { padding: 1.8rem 1.2rem; border-radius: 24px; }
+        }
+
+        /* typography */
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #2c2824;
+        }
+        h1 {
+            font-size: 2.4rem;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+        }
+        h2 {
+            font-size: 1.6rem;
+            margin: 2.2rem 0 1rem 0;
+            border-bottom: 2px solid #ede5db;
+            padding-bottom: 0.3rem;
+        }
+        h3 {
+            font-size: 1.15rem;
+            margin: 1.6rem 0 0.6rem 0;
+            color: #4d443c;
+        }
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1rem;
+        }
+        a {
+            color: #7a5d3e;
+            text-decoration: none;
+            border-bottom: 1px solid #d9cbbc;
+            transition: border-color 0.2s, color 0.2s;
+        }
+        a:hover {
+            border-bottom-color: #7a5d3e;
+            color: #3c2e22;
+        }
+
+        /* hero */
+        .hero {
+            text-align: center;
+            padding: 1.2rem 0 2rem 0;
+        }
+        .hero .sub {
+            font-size: 1.05rem;
+            color: #7b6f64;
+            max-width: 600px;
+            margin: 0.8rem auto 1.6rem;
+        }
+        .hero .meta-badge {
+            display: inline-block;
+            background: #ede5db;
+            color: #4f433b;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+        }
+
+        /* 引用块 / 提示框 */
+        .inset-box {
+            background: #f3eee7;
+            border-left: 4px solid #b7a48d;
+            padding: 1.2rem 1.6rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.6rem 0;
+            font-size: 0.98rem;
+        }
+        .inset-box p:last-child { margin-bottom: 0; }
+        .inset-box strong {
+            color: #4a3d33;
+        }
+
+        .faq-mini {
+            margin: 1.8rem 0 0.8rem 0;
+        }
+        .faq-item {
+            border-bottom: 1px solid #e6ddd2;
+            padding: 0.9rem 0;
+        }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-q {
+            font-weight: 500;
+            color: #3d3530;
+            margin-bottom: 0.3rem;
+        }
+        .faq-a {
+            color: #5f554b;
+            font-size: 0.95rem;
+        }
+
+        /* 特色网格 */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.2rem 0 0.4rem;
+        }
+        .feature-card {
+            background: #f7f2ea;
+            padding: 1.2rem 1rem;
+            border-radius: 16px;
+            border: 1px solid #ece3d9;
+        }
+        .feature-card h4 {
+            font-weight: 500;
+            font-size: 1.05rem;
+            margin-bottom: 0.4rem;
+            color: #3b332e;
+        }
+        .feature-card p {
+            font-size: 0.93rem;
+            margin-bottom: 0;
+            color: #5f554b;
+        }
+        @media (max-width: 520px) {
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        /* 底部区域 */
+        .footer-links {
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #e6ddd2;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem 3rem;
+            justify-content: center;
+            align-items: baseline;
+            font-size: 0.92rem;
+            color: #7e7266;
+        }
+        .footer-links a {
+            border-bottom: 1px solid transparent;
+        }
+        .footer-links a:hover {
+            border-bottom-color: #7a5d3e;
+        }
+        .footer-note {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.82rem;
+            color: #988e84;
+        }
+
+        /* 辅助 */
+        .text-muted { color: #7e7266; }
+        .mt-1 { margin-top: 1rem; }
+        .mb-half { margin-bottom: 0.6rem; }
+        .inline-link-wrap {
+            background: #f1ece4;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- hero -->
+    <div class="hero">
+        <span class="meta-badge">常回来看看 · 持续关注</span>
+        <h1>28圈</h1>
+        <p class="sub">一个值得你加入书签、再次访问的地方。<br>无论何时回来，总有属于你的内容角落。</p>
+    </div>
+
+    <!-- 从收藏与回访切入 -->
+    <h2>把这里放进收藏夹</h2>
+    <p>每天打开的网站很多，但真正愿意存下来的很少。<strong><a href="https://asia-28circle.com">28圈</a></strong> 就是那种你不舍得从书签栏删除的站点。它不追求一次性的热闹，而是希望每次你回来，都能看到熟悉又新鲜的脉络。</p>
+
+    <div class="inset-box">
+        <p><strong>小提示</strong> · 如果你刚刚发现这里，不妨现在就把它存到浏览器收藏夹。下次想回来时，不必翻历史记录，直接点一下就好。</p>
+    </div>
+
+    <p>我们一直在想，什么样的页面能让访客产生「下次还要来」的感觉。答案其实很平常：持续提供值得读的内容、保持干净稳定的浏览体验，以及不打扰你的安静氛围。这些 <a href="https://asia-28circle.com">28圈</a> 一直在做。</p>
+
+    <!-- 优势 / 特点 -->
+    <h2>为什么值得再次打开</h2>
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h4>📑 内容节奏刚好</h4>
+            <p>不会用夸张标题吸引你点进来，但每篇都能让你认真看下去。一周回来两三次，总能看到新东西。</p>
+        </div>
+        <div class="feature-card">
+            <h4>🧭 导航简单直接</h4>
+            <p>没有眼花缭乱的弹窗或浮层。你想找什么，几步就能翻到，就像打开一本翻熟了的笔记本。</p>
+        </div>
+        <div class="feature-card">
+            <h4>🔖 常看常新</h4>
+            <p>我们定期更新话题和资源，但不会刷屏。你上次读到一半的文章，下次来可能还有续篇。</p>
+        </div>
+        <div class="feature-card">
+            <h4>☕ 安静陪伴感</h4>
+            <p>不诱导注册，不强制关注。你只是一个读者，坐一会儿，翻一翻，然后合上页面去做别的事。</p>
+        </div>
+    </div>
+
+    <!-- 说明区：从再次访问角度 -->
+    <h2>当你再次回到这里</h2>
+    <p>很多时候我们收藏一个网站，是因为「以后可能有用」。但对 <strong>28圈</strong> 来说，我们希望你回来不是因为「有用」，而是因为「想来」。页面加载够快、字体读着不累、段落间有呼吸感——这些细节构成了你愿意再次点击的理由。</p>
+
+    <div class="inset-box">
+        <p><strong>我们观察到</strong> · 不少访客会在一周内反复回来两三次，有人甚至把这里设成了浏览器新标签页的备选。这不是什么刻意的运营手段，只是内容本身让人想回来翻一翻。</p>
+    </div>
+
+    <p>如果你还没试过，下次打开浏览器时，顺手输入 <a href="https://asia-28circle.com">28圈</a>，看看首页有没有你感兴趣的话题。不用一次读完，存下来，慢慢看。</p>
+
+    <!-- FAQ 摘要 -->
+    <h2>你可能想问的</h2>
+    <div class="faq-mini">
+        <div class="faq-item">
+            <div class="faq-q">❓ 需要注册或者登录才能看吗？</div>
+            <div class="faq-a">不需要。所有页面对所有人开放，没有会员墙，也没有隐藏内容。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">❓ 内容多久更新一次？</div>
+            <div class="faq-a">基本保持每周有新增，偶尔会有专题整理。你可以隔几天回来看看，不用天天刷。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">❓ 我能在手机上看吗？</div>
+            <div class="faq-a">可以。页面做了响应式适配，手机和电脑上阅读体验都很舒服。</div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-q">❓ 怎么最快回到这里？</div>
+            <div class="faq-a">建议你把 <a href="https://asia-28circle.com">28圈</a> 添加到浏览器书签栏，或者直接记住域名，几秒钟就能打开。</div>
+        </div>
+    </div>
+
+    <!-- 底部链接（带多个自然链接） -->
+    <div class="footer-links">
+        <span>← 把 <a href="https://asia-28circle.com">28圈</a> 放进书签</span>
+        <span>← 或者直接再次访问</span>
+        <span>← 持续关注更新</span>
+    </div>
+    <div class="footer-note">
+        <span>用心写内容，安静地等你回来</span>
+    </div>
+
+</div>
+</body>
+</html>
